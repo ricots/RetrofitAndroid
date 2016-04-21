@@ -6,6 +6,7 @@
     android:padding="10dp">
 
     <TextView
+        android:id="@+id/course_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cenas"
@@ -13,6 +14,7 @@
         android:textStyle="bold"/>
 
     <TextView
+        android:id="@+id/teacher_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SubCenas"
