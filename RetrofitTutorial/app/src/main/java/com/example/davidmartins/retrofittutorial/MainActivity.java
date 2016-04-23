@@ -2,11 +2,18 @@ package com.example.davidmartins.retrofittutorial;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.davidmartins.retrofittutorial.adapter.UdacityAdapter;
 import com.example.davidmartins.retrofittutorial.api.UdacityService;
 import com.example.davidmartins.retrofittutorial.models.Catalog;
+import com.example.davidmartins.retrofittutorial.models.Course;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,11 +25,18 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final String URL = "https://www.udacity.com/public-api/v0/";
+    public List<Course> courseList = new ArrayList<>();
+    public UdacityAdapter courseAdapter;
+    public RecyclerView courseRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        courseRecyclerView = (RecyclerView) findViewById(R.id.courseRecyclerView);
+        courseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -38,8 +52,13 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful())
                 {
                     //TODO Populate recyclerview
+                    Catalog catalog = response.body();
 
-                    Toast.makeText(MainActivity.this, "SUCCESS", Toast.LENGTH_LONG).show();
+                    for (Course c : catalog.courses) {
+                        courseList.add(c);
+                    }
+                    courseAdapter = new UdacityAdapter(courseList);
+                    courseRecyclerView.setAdapter(courseAdapter);
                 } else {
                     Log.e(TAG, "Error: " + response.message());
                 }

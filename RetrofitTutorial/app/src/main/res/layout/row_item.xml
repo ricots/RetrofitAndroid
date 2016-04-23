@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/course_textView"
+        android:id="@+id/course_title_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cenas"
@@ -14,7 +14,7 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/teacher_textView"
+        android:id="@+id/course_subtitle_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SubCenas"
